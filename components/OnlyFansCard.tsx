@@ -83,6 +83,25 @@ const OnlyFansCard: React.FC<OnlyFansCardProps> = ({ item, onCardClick }) => {
   return (
     <div onClick={handleCardInteraction} className="group relative overflow-hidden rounded-lg bg-neutral-800 shadow-lg aspect-[3/4] cursor-pointer">
       {shareNotification && <Notification message={shareNotification} type="success"/>}
+      
+      {/* Media count indicator */}
+      {(item.mediaCount.images > 0 || item.mediaCount.videos > 0) && (
+        <div className="absolute top-3 right-3 z-10 flex gap-2">
+          {item.mediaCount.images > 1 && (
+            <div className="flex items-center gap-1 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 text-white text-xs font-medium">
+              <MediaIcon />
+              <span>{item.mediaCount.images}</span>
+            </div>
+          )}
+          {item.mediaCount.videos > 0 && (
+            <div className="flex items-center gap-1 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 text-white text-xs font-medium">
+              <VideoIcon />
+              <span>{item.mediaCount.videos}</span>
+            </div>
+          )}
+        </div>
+      )}
+      
       <img 
         src={item.thumbnailUrl || item.imageUrl} 
         alt={item.title} 
