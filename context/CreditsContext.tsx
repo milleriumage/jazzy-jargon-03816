@@ -291,24 +291,13 @@ export const CreditsProvider: React.FC<{ children: ReactNode }> = ({ children })
             // Use consistent placeholder SVG instead of random images
             const placeholderSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjgwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzI2MjYyNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=';
             
-            // Extract file path from storage_path (remove user_id/content_id prefix if present)
-            const getFilePath = (storagePath: string) => {
-              // If storage_path is already a full URL, extract the path
-              if (storagePath.includes('content-media/')) {
-                return storagePath.split('content-media/')[1];
-              }
-              return storagePath;
-            };
-            
             // Get public URL for the full image
             const imageUrl = firstImage?.storage_path 
-              ? supabase.storage.from('content-media').getPublicUrl(getFilePath(firstImage.storage_path)).data.publicUrl
+              ? supabase.storage.from('content-media').getPublicUrl(firstImage.storage_path).data.publicUrl
               : placeholderSVG;
             
-            // Create thumbnail URL with transformation
-            const thumbnailUrl = firstImage?.storage_path
-              ? `${imageUrl}?width=400&height=600&quality=80`
-              : placeholderSVG;
+            // Use same URL for thumbnail (browser will resize via CSS)
+            const thumbnailUrl = imageUrl;
             
             return {
               id: item.id,
@@ -420,24 +409,13 @@ export const CreditsProvider: React.FC<{ children: ReactNode }> = ({ children })
             // Use consistent placeholder SVG instead of random images
             const placeholderSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjgwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzI2MjYyNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=';
             
-            // Extract file path from storage_path (remove user_id/content_id prefix if present)
-            const getFilePath = (storagePath: string) => {
-              // If storage_path is already a full URL, extract the path
-              if (storagePath.includes('content-media/')) {
-                return storagePath.split('content-media/')[1];
-              }
-              return storagePath;
-            };
-            
             // Get public URL for the full image
             const imageUrl = firstImage?.storage_path 
-              ? supabase.storage.from('content-media').getPublicUrl(getFilePath(firstImage.storage_path)).data.publicUrl
+              ? supabase.storage.from('content-media').getPublicUrl(firstImage.storage_path).data.publicUrl
               : placeholderSVG;
             
-            // Create thumbnail URL with transformation
-            const thumbnailUrl = firstImage?.storage_path
-              ? `${imageUrl}?width=400&height=600&quality=80`
-              : placeholderSVG;
+            // Use same URL for thumbnail (browser will resize via CSS)
+            const thumbnailUrl = imageUrl;
             
             return {
               id: item.id,
