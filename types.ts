@@ -62,6 +62,7 @@ export interface ContentItem {
   title: string;
   price: number;
   imageUrl: string;
+  thumbnailUrl?: string;
   offerText?: string;
   mediaType?: 'image' | 'video';
   userReactions: Record<string, string>; // Key is now user ID (string)

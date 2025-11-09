@@ -84,10 +84,11 @@ const OnlyFansCard: React.FC<OnlyFansCardProps> = ({ item, onCardClick }) => {
     <div onClick={handleCardInteraction} className="group relative overflow-hidden rounded-lg bg-neutral-800 shadow-lg aspect-[3/4] cursor-pointer">
       {shareNotification && <Notification message={shareNotification} type="success"/>}
       <img 
-        src={item.imageUrl} 
+        src={item.thumbnailUrl || item.imageUrl} 
         alt={item.title} 
         style={blurStyle} 
         className="w-full h-full object-cover transition-all duration-500 scale-110"
+        loading="lazy"
         onError={(e) => {
           e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JbWFnZSBOb3QgRm91bmQ8L3RleHQ+PC9zdmc+';
         }}
